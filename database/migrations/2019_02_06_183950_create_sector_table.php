@@ -13,8 +13,12 @@ class CreateSectorTable extends Migration
      */
     public function up()
     {
-        Schema::create('sector', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name',50)->unique();
+            $table->string('initials',10)->unique();
+            $table->integer('number_memo')->unsigned();
+
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateSectorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sector');
+        Schema::dropIfExists('sectors');
     }
 }

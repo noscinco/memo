@@ -13,8 +13,16 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('memo_id')->unsigned();
+            $table->string('attachment',100)->unique();
+            $table->string('name',50);
+
+            $table->foreign('memo_id')
+            ->references('id')
+            ->on('memos')->onDelete('RESTRICT');
+
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachment');
+        Schema::dropIfExists('attachments');
     }
 }
