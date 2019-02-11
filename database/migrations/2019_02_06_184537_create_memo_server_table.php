@@ -13,9 +13,20 @@ class CreateMemoServerTable extends Migration
      */
     public function up()
     {
-        Schema::create('memo_server', function (Blueprint $table) {
+        Schema::create('memo_servers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('memo_id')->unsigned();
+            $table->integer('server_id')->unsigned();
             $table->timestamps();
+
+
+            $table->foreign('memo_id')
+            ->references('id')
+            ->on('memos')->onDelete('RESTRICT');
+            
+            $table->foreign('server_id')
+            ->references('id')
+            ->on('servers')->onDelete('RESTRICT');
         });
     }
 
@@ -26,6 +37,6 @@ class CreateMemoServerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('memo_server');
+        Schema::dropIfExists('memo_servers');
     }
 }

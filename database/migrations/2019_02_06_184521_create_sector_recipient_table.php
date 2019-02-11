@@ -13,9 +13,21 @@ class CreateSectorRecipientTable extends Migration
      */
     public function up()
     {
-        Schema::create('sector_recipient', function (Blueprint $table) {
+        Schema::create('sector_recipients', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('memo_id')->unsigned();
+            $table->integer('sector_id')->unsigned();
             $table->timestamps();
+
+
+            $table->foreign('memo_id')
+            ->references('id')
+            ->on('memos')->onDelete('RESTRICT');
+            
+            $table->foreign('sector_id')
+            ->references('id')
+            ->on('sectors')->onDelete('RESTRICT');
+            
         });
     }
 
@@ -26,6 +38,6 @@ class CreateSectorRecipientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sector_recipient');
+        Schema::dropIfExists('sector_recipients');
     }
 }
