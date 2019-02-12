@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\Sector;
+use App\Office;
+use App\Server;
 class RegisterController extends Controller
 {
     /*
@@ -49,9 +51,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'name' => ['required', 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/', 'max:100'],
+            'email' => ['required', 'regex:/^[^\W_]{6,}$/', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:6','max:20','confirmed'],
+            'cpf'=>['required','cpf','unique:servers'],
+            'siape_code'=>['required','unique:servers','max:20'],
+            'sector_code'=>['required'],
+            'office_code'=>['required'],
+            'initials_code'=>['required','max:5'],
+
         ]);
     }
 
@@ -63,10 +71,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $sector = Sector::find($data['sector_code']);
+        $office = Office::find($data['office_code']);
+
+        $user = User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $server = new Server();
+        $server->name = $data['name'];
+        $server->cpf = $data['cpf'];
+        $server->siape_code=$data['siape_code'];
+        $server->user_id=$user->id;
+        $server->office()->associate($office);
+        $server->sector()->associate($sector);
+        
+         $role = Role::where('name', '=', 'Server_Unauthorized')->first();
+        
+        $server->assignRole($role);
+
+
+        $server->givePermissionTo('unauthorized');
+        $server->save();
+        return $server;
+
     }
+    /*
+    public function register(Request $request){
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return redirect()->route('login')
+            ->with(['message' => 'Sua solicitação de login foi registrada, aguarde a aceitação']);
+    }
+
+    */
 }

@@ -13,43 +13,41 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-
         /*
          * Add Permissions
-         *
          */
-        if (Permission::where('name', '=', 'Can View Users')->first() === null) {
+        if (Permission::where('name', '=', 'Administrator')->first() === null) {
             Permission::create([
-                'name'        => 'Can View Users',
-                'slug'        => 'view.users',
-                'description' => 'Can view users',
+                'name'        => 'Administrator',
+                'slug'        => 'administrator',
+                'description' => 'controll system',
                 'model'       => 'Permission',
             ]);
         }
 
-        if (Permission::where('name', '=', 'Can Create Users')->first() === null) {
+        if (Permission::where('name', '=', 'Server Authorized')->first() === null) {
             Permission::create([
-                'name'        => 'Can Create Users',
-                'slug'        => 'create.users',
-                'description' => 'Can create new users',
+                'name'        => 'Server Authorized',
+                'slug'        => 'server.authorized',
+                'description' => 'Can access system',
                 'model'       => 'Permission',
             ]);
         }
 
-        if (Permission::where('name', '=', 'Can Edit Users')->first() === null) {
+        if (Permission::where('name', '=', 'Server Admin Authorized')->first() === null) {
             Permission::create([
-                'name'        => 'Can Edit Users',
-                'slug'        => 'edit.users',
-                'description' => 'Can edit users',
+                'name'        => 'Server Admin Authorized',
+                'slug'        => 'server.admin.authorized',
+                'description' => 'Can to manage sector',
                 'model'       => 'Permission',
             ]);
         }
 
-        if (Permission::where('name', '=', 'Can Delete Users')->first() === null) {
+        if (Permission::where('name', '=', 'Can access memo')->first() === null) {
             Permission::create([
-                'name'        => 'Can Delete Users',
-                'slug'        => 'delete.users',
-                'description' => 'Can delete users',
+                'name'        => 'Can access memo',
+                'slug'        => 'access.memo',
+                'description' => 'Can access memo',
                 'model'       => 'Permission',
             ]);
         }
