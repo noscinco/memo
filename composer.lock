@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f91a1c7998a7c3c386e94a2098d30abe",
+    "content-hash": "1c825942b3cf00fb1f38f9769c10b0b5",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -550,6 +550,46 @@
             "time": "2018-12-04T20:46:45+00:00"
         },
         {
+            "name": "jailtonsc/validador-cpf-laravel",
+            "version": "v5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jailtonsc/validador-cpf-laravel.git",
+                "reference": "99cee884dbeac7b120bbe303073ff14fea430e07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jailtonsc/validador-cpf-laravel/zipball/99cee884dbeac7b120bbe303073ff14fea430e07",
+                "reference": "99cee884dbeac7b120bbe303073ff14fea430e07",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ValidadorCpf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jailton S. C.",
+                    "email": "jailton.dos.santos.cruz@gmail.com"
+                }
+            ],
+            "description": "Validador de cpf com suporte para laravel 5.*",
+            "keywords": [
+                "cpf",
+                "laravel"
+            ],
+            "time": "2018-11-06T00:02:34+00:00"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "v0.2",
             "source": {
@@ -636,6 +676,64 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jeremykenedy/laravel-roles",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/laravel-roles.git",
+                "reference": "142a8587d39f9dd9057ea6e89463843a797e2fc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/laravel-roles/zipball/142a8587d39f9dd9057ea6e89463843a797e2fc9",
+                "reference": "142a8587d39f9dd9057ea6e89463843a797e2fc9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.3.*|5.4.*|5.5.*|5.6.*|5.7.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jeremykenedy\\LaravelRoles\\RolesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\LaravelRoles\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Bičan",
+                    "email": "romanbican@seznam.cz"
+                },
+                {
+                    "name": "Jeremy Kenedy",
+                    "email": "jeremykenedy@gmail.com"
+                },
+                {
+                    "name": "Ultraware"
+                }
+            ],
+            "description": "Powerful package for handling roles and permissions in Laravel. Supports Laravel 5.3, 5.4, and 5.5",
+            "keywords": [
+                "acl",
+                "laravel",
+                "levels",
+                "permissions",
+                "roles"
+            ],
+            "time": "2018-09-07T06:04:40+00:00"
         },
         {
             "name": "jeroennoten/laravel-adminlte",
