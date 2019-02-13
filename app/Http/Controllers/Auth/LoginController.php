@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Server;
+use Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -36,4 +39,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function login(Request $request){
+        //validate the form data
+        $this->validate($request,[
+            'email'=>'required|email',
+            'password'=>'required|min:6'
+        ]);
+        //attempt tp log the user in
+        if(Auth::guard('user')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
+             //if successful, then redirect to their intended location
+            if(Auth::user()->hasRole('server.unauthorized')){
+                Auth::guard('user')->logout();
+                $request->session()->flush();
+                $request->session()->regenerate();
+                return redirect()->guest(route( 'home' ))->with(['message' => 'Você ainda não foi authorizado a acessar sua pagina']);
+            }else if(Auth::user()->hasRole('admin')){//administrator
+                return redirect()->route('index');
+            }else if(Auth::user()->hasRole('server_admin')){//server administrator
+                return redirect()->route('index');
+            }else if(Auth::user()->hasRole('server')){//server
+                return redirect()->route('index');
+            }            
+        }
+        //if unsuccessful, then redirect back to the login form
+        return redirect()->back()->withInput($request->only('email','remenber'))->with(['error' => 'Dados inseridos não cadastrados']);
+    }
+
 }

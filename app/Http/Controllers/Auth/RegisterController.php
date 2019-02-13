@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use jeremykenedy\LaravelRoles\Models\Permission;
+use jeremykenedy\LaravelRoles\Models\Role;
 use App\Sector;
 use App\Office;
 use App\Server;
@@ -86,17 +88,14 @@ class RegisterController extends Controller
         $server->office()->associate($office);
         $server->sector()->associate($sector);
         
-         $role = Role::where('name', '=', 'Server_Unauthorized')->first();
+        $role = Role::where('name', '=', 'Server_Unauthorized')->first();
         
         $server->assignRole($role);
-
-
-        $server->givePermissionTo('unauthorized');
         $server->save();
         return $server;
 
     }
-    /*
+    
     public function register(Request $request){
         $this->validator($request->all())->validate();
 
@@ -106,5 +105,5 @@ class RegisterController extends Controller
             ->with(['message' => 'Sua solicitação de login foi registrada, aguarde a aceitação']);
     }
 
-    */
+    
 }

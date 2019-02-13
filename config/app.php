@@ -176,7 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //aditional Providers
-        ValidadorCpf\CpfServiceProvider::class
+        ValidadorCpf\CpfServiceProvider::class,
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
 
     ],
 
