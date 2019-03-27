@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -54,7 +55,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/', 'max:100'],
-            'email' => ['required', 'regex:/^[^\W_]{6,}$/', 'email', 'max:50', 'unique:users'],
+            'email' => ['required', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:6','max:20','confirmed'],
             'cpf'=>['required','cpf','unique:servers'],
             'siape_code'=>['required','unique:servers','max:20'],

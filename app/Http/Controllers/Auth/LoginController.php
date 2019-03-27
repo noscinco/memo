@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Server;
@@ -46,15 +46,15 @@ class LoginController extends Controller
             'password'=>'required|min:6'
         ]);
         //attempt tp log the user in
-        if(Auth::guard('user')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
+        if(Auth::guard('web')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
              //if successful, then redirect to their intended location
             if(Auth::user()->hasRole('server.unauthorized')){
-                Auth::guard('user')->logout();
+                Auth::guard('web')->logout();
                 $request->session()->flush();
                 $request->session()->regenerate();
                 return redirect()->guest(route( 'home' ))->with(['message' => 'Você ainda não foi authorizado a acessar sua pagina']);
             }else if(Auth::user()->hasRole('admin')){//administrator
-                return redirect()->route('index');
+                return redirect()->route('home');
             }else if(Auth::user()->hasRole('server_admin')){//server administrator
                 return redirect()->route('index');
             }else if(Auth::user()->hasRole('server')){//server
