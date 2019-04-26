@@ -13,6 +13,8 @@ use jeremykenedy\LaravelRoles\Models\Role;
 use App\Sector;
 use App\Office;
 use App\Server;
+use Illuminate\Auth\Events\Registered;
+
 class RegisterController extends Controller
 {
     /*
@@ -44,6 +46,11 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    public function showRegistrationForm(){
+        $sectors = Sector::orderBy('name','asc')->get();
+        $offices = Office::orderBy('name','asc')->get();
+        return view('auth.register',compact('sectors','offices'));
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -61,7 +68,7 @@ class RegisterController extends Controller
             'siape_code'=>['required','unique:servers','max:20'],
             'sector_code'=>['required'],
             'office_code'=>['required'],
-            'initials_code'=>['required','max:5'],
+           
 
         ]);
     }
@@ -72,6 +79,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    
     protected function create(array $data)
     {
         $sector = Sector::find($data['sector_code']);
@@ -88,11 +96,14 @@ class RegisterController extends Controller
         $server->user_id=$user->id;
         $server->office()->associate($office);
         $server->sector()->associate($sector);
-        
+        $server->initials_code = $this->initials(trim($data['name']));
+        $server->number_memo =0;
+
         $role = Role::where('name', '=', 'Server_Unauthorized')->first();
-        
-        $server->assignRole($role);
         $server->save();
+
+        $user->attachRole($role);
+        $user->save();
         return $server;
 
     }
@@ -106,5 +117,22 @@ class RegisterController extends Controller
             ->with(['message' => 'Sua solicitação de login foi registrada, aguarde a aceitação']);
     }
 
+    private function initials($name){
+        $words = explode(" ",$name);
+        $initials="";
+        foreach($words as $letter){
+            $initials .=$letter[0];
+        }
+        $initials = strtoupper($initials);
+        $flag=1;
+        while(Server::where('initials_code','=',$initials)->get()->count()>0){
+            $flag+=1;
+        }
+        if($flag>1)
+            $initials.=$flag;
+            
+        $initials = strtoupper($initials);
+        return trim($initials);
+    }
     
 }

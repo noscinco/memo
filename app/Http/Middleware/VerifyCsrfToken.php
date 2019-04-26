@@ -21,4 +21,10 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+    protected function tokensMatch($request){
+        if(env('APP_ENV') === 'laraveltesting') {
+            return true;
+        }
+        return parent::tokensMatch($request);
+    }
 }
