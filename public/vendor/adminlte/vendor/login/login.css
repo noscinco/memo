@@ -1,0 +1,207 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    outline: none;
+    border: none;
+}
+body {
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    font-size: 14px;
+    background: #5138e3;
+    text-rendering: optimizeLegibility;
+}
+
+::placeholder{
+    color: #f3a3f4;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+.type-font{
+    font: 1rem "Courier", lighter;
+}
+
+.font-color{
+    color: #f3f3f3;
+}
+.login-box {
+    float: center;
+    height: 100%;
+}
+.login-box h1 {
+    font: 5rem "Courier", lighter;
+    margin-top: 50px;
+    color: #f3f3f3;
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #f3f3f3;
+    text-align: center;
+}
+
+p {
+    
+    padding-left: 12px;
+    margin-bottom: 10px;
+    color: #f3f3f3;
+}
+
+.form-group input {
+    
+    width: 90%;
+    height: 20px;
+    margin-left: 10px;
+    background-color: #5138e3;
+    border-bottom: 1px solid #f1c40f;
+    padding-left: 10px;
+  
+}
+
+input.span {
+    position: relative;
+}
+
+span.fa {
+    float: left;
+    left: 15px;
+    top: 2px;
+    color: #f1c40f;
+}
+label {
+    margin-left: 27px;
+}
+.custom-select{
+    background-color: #5138e3;
+    border-bottom: 1px solid #f1c40f;
+    
+}
+a.text-right {
+    
+    float: right;
+    padding-right: 4px;
+}
+a.text-left {
+    float: left;
+    padding-left: 2px;
+}
+
+button {
+    margin-top: 20px;
+    margin-left: 30%;
+    width: 100px;
+    cursor: pointer;
+    
+}
+button.btn {
+    padding: 7px 0px 7px 0px;
+    font: 1em "Georgia";
+    background-color: #f1c40f;
+    border: 1px solid #5138e3;
+    color: #5138e3;
+    border-radius: 3px;
+    text-align: center;
+}
+
+button.btn-ajust{
+    padding: 5px 0px 5px 0px;
+    width: 30%;
+}
+
+
+@media screen and (min-width: 768px) {
+    .login-box {
+        position: absolute;
+        right: 0;
+        float: left;
+        width: 400px;
+        height: 100%;
+    }
+    a.text-right {
+        
+        float: right;
+        padding-right: 20px;
+    }
+    a.text-left {
+        
+        float: left;
+        padding-left: 20px;
+    }
+    .form-group input {
+        width: 100%;       
+    }
+    button {
+        margin-top: 30%;     
+    }
+}
+@media screen and (min-width: 960px) {
+    .login-box h1 {
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .login-box h2 {
+        text-align: left;
+        padding-left: 10px;
+    }
+    .login-box {
+        width: 600px;
+        height: 50%;
+    }
+
+    .login-box h1 {
+        margin-top: 90px;
+        
+    }
+    .login-box h2 {
+        margin-bottom: 60px;
+    }
+    p {
+        padding-left: 12px;
+        margin-bottom: 10px;
+    }
+    .form-group {
+        padding-bottom: 10px;
+    }
+    .form-group input {
+        width: 67%;
+        padding: 0px 20px 5px 20px;
+        
+        
+    }
+
+    span {
+        position: relative;
+    }
+    span.fa {
+        float: left;
+        left: 15px;
+        top: 2px;
+    }
+
+    .auth-links {
+        padding: 0px 60px 10px 10px;
+    }
+    a.text-right {
+        
+        margin-right: 60px;
+        float: right;
+    }
+
+    a.text-left {
+        color: #f3f3f3;
+        float: left;
+    }
+    button {
+        margin-top: 20px;
+        margin-left: 30%;
+        width: 100px;
+    }
+   
+}

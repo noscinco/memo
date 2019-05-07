@@ -9,12 +9,9 @@
 
 @section('body')
     <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
-        </div>
-        <!-- /.login-logo -->
+         <h1>Nova senha</h1>
         <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte::adminlte.password_reset_message') }}</p>
+            <p class="type-font font-color">Insira seu Email</p>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
@@ -23,23 +20,21 @@
             <form action="{{ url(config('adminlte.password_email_url', 'password/email')) }}" method="post">
                 {!! csrf_field() !!}
 
-                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-                    <input type="email" name="email" class="form-control" value="{{ isset($email) ? $email : old('email') }}"
-                           placeholder="{{ trans('adminlte::adminlte.email') }}">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <div class="form-group has-feedback ">
+                    <input type="email" name="email" class="font-color type-font" autocomplete="off" >
+                    <span class="fa fa-envelope form-control-feedback"></span>
+
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
                 </div>
-                <button type="submit"
-                        class="btn btn-primary btn-block btn-flat"
+                <button type="submit"class="btn btn-ajust"
                 >{{ trans('adminlte::adminlte.send_password_reset_link') }}</button>
             </form>
         </div>
-        <!-- /.login-box-body -->
-    </div><!-- /.login-box -->
+    </div>
 @stop
 
 @section('adminlte_js')
