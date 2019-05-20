@@ -8,6 +8,10 @@
 @section('body_class', 'register-page')
 
 @section('body')
+                <?php 
+                use App\Sector;
+                use App\Office;
+                ?> 
     <div class="login-box">
         <h1>Cadastrar</h1>
         <h2>Insira seus dados</h2>
@@ -34,13 +38,8 @@
                         </span>
                     @endif
                 </div>
-
-                <!-- ACRESCENTEI os campos a partir daqui
-                DEIXEI A MESMA ESTRUTURA 
-                !!! OS CAMPOS "DEPARTAMENTO" E "CARGO" DEVEM VIR DO BD 
-                 -->
                 <div class="form-group has-feedback {{ $errors->has('cpf') ? 'has-error' : '' }}">
-                    <input type="number" name="cpf" class="font-color type-font"  autocomplete="off" value="{{ old('pf') }}"
+                    <input type="text" name="cpf" class="font-color type-font"  autocomplete="off" value="{{ old('pf') }}"
                            placeholder="CPF">
                     <span class="fa fa-user form-control-feedback"></span>
                     @if ($errors->has('cpf'))
@@ -49,43 +48,45 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group has-feedback {{ $errors->has('matricula') ? 'has-error' : '' }}">
-                    <input type="number" name="matricula" class="font-color type-font"  autocomplete="off" 
-                           placeholder="Matrícula">
+                <div class="form-group has-feedback {{ $errors->has('siape_code') ? 'has-error' : '' }}">
+                    <input type="text" name="siape_code" class="font-color type-font"  autocomplete="off" 
+                           placeholder="SIAP">
                     <span class="fa fa-user form-control-feedback"></span>
-                    @if ($errors->has('cpf'))
+                    @if ($errors->has('siape-code'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('matricula') }}</strong>
+                            <strong>{{ $errors->first('siape_code') }}</strong>
                         </span>
                     @endif
                 </div>
-                <div class="form-group has-feedback ">
-                    <label type="text"   autocomplete="off" > </label>       
-                    <span class="fa fa-user form-control-feedback"></span>
-                    
-       
-          <select class="custom-select font-color type-font" name="depatamento">
-            <option selected>Departamento</option>      
-            <option value= "">deve ser puxado do banco</option>
-          </select>
-     
-                    
-                </div>
-                <div class="form-group has-feedback ">
-                <label type="text" autocomplete="off" > </label>
-                <span class="fa fa-user form-control-feedback"></span> 
-                    <select class="custom-select font-color type-font" name="cargo" >
-                         <option selected> Cargo</option>
-            
-                         <option value= "">deve ser puxado do banco</option>
-        
-                    </select>
-                    
-                    @if ($errors->has('CARGO'))
+
+                <!-- CAMPOS QUE DEVEM SER PUXADOS            -->
+
+                
+                <div class="form-group has-feedback {{$errors->has('sector_code') ? 'has-error': ''}}">
+                <!-- Verificar essa parte -->
+              <!-- <?php $sector = Sector::pluck('name_sector','id')->toArray();?> 
+                    {!!Form::select('sector_code',[null=>'Selecione ...']+$sector)!!}
+                    @if ($errors->has('sector_code'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('matricula') }}</strong>
+                            <strong>{{ $errors->first('sector_code') }}</strong>
                         </span>
-                    @endif
+                    @endif               
+                -->
+    
+                </div>
+                <div class="form-group has-feedback {{$errors->has('office_code') ? 'has-error': ''}}">
+                <!-- Verificar essa parte     -->
+
+                <!--<?php $office = Office::pluck('name_office','id')->toArray();?>
+                    {!!Form::select('office_code',[null=>'Selecione ...']+$office)!!}
+                    @if ($errors->has('office_code'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('office_code') }}</strong>
+                        </span>
+                    @endif 
+                 -->
+
+                    
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class=" font-color type-font" 
